@@ -120,6 +120,24 @@ build_dependencies() {
 header "Building dependencies"
 build_dependencies | indent
 
+run_gulp() {
+  if [ -f $BUILD_DIR/gulpfile.js ]; then
+    # get the env vars
+    if [ -d "$ENV_DIR" ]; then
+      echo "Exporting config vars to environment"
+      export_env_dir $ENV_DIR
+    fi
+
+    echo "Found gulpfile, running grunt heroku:$NODE_ENV task"
+    $BUILD_DIR/node_modules/.bin/gulp heroku:$NODE_ENV
+  else
+    echo "No gulpfile.js found."
+  fi
+}
+
+header "Detecting and Running Gulp"
+run_gulp | indent
+
 cache_build() {
   local cache_directories=$(get_cache_directories)
   
