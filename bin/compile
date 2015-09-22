@@ -128,7 +128,7 @@ run_gulp() {
       export_env_dir $ENV_DIR
     fi
 
-    echo "Found gulpfile, running grunt heroku:$NODE_ENV task"
+    echo "Found gulpfile, running gulp heroku:$NODE_ENV task"
     $BUILD_DIR/node_modules/.bin/gulp heroku:$NODE_ENV
   else
     echo "No gulpfile.js found."
